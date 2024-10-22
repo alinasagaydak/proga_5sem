@@ -1,0 +1,3 @@
+Average Value Method:	0.113851	error:	7.21597e-05
+Geometric Algorithm:	0.114094	error:	3.57121e-07
+Main Part Integration:	0.563713	error:	0.449202
