@@ -10,7 +10,7 @@ double psi(double* x, double* par) {
     return pow(2/TMath::Pi(), 0.25) * (1 / sqrt(par[0])) * exp(-pow(x[0]/par[0], 2));
 }
 
-double potential(double* x) {
+double potential(double* x, double* par) {
     if (fabs(x[0]) < 10) return -0.5;
     else return 0;
 }
@@ -45,7 +45,7 @@ void scalar_prod(double amin, double amax) {
     scalar_pr->SetTitle("<p2> as a function of a");
     scalar_pr->GetXaxis()->SetTitle("a");
     scalar_pr->GetYaxis()->SetTitle("<p2>");
-    s->SaveAs("sc_pr.pdf");
+    s->SaveAs("sc_pr.png");
 }
 
 void task3() {
