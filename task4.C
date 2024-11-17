@@ -16,6 +16,6 @@ void task4() {
         if (x <= l * cos(phi)) n++;
     }
     
-    double my_pi = 2 * N * l / (L * n);     
+    double my_pi = 4 * N * l / (L * n);     
     std::cout << my_pi << std::endl;
 }
