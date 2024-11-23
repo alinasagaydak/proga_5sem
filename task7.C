@@ -35,7 +35,7 @@ void task7() {
         else if (Isrfilter == 1 && chi2_3p < 30) {
             my_nph = nph;
             my_eph = eph;
-            for (int j; j < nph; j++) {
+            for (int j = 0; j < nph; j++) {
                 my_thetaph[j] = thetaph[j];
                 my_phiph[j] = phiph[j];
                 MyTree->Fill();
