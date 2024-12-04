@@ -1,0 +1,52 @@
+ **********
+ **    1 **SET ERR           1
+ **********
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 mean gaus    3.00000e+00  1.00000e-01     no limits
+     2 sigma gaus   1.00000e+00  1.00000e-01     no limits
+     3 const        1.00000e-01  1.00000e-02     no limits
+ **********
+ **    2 **MIGRAD         500           1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-03
+ FCN=inf FROM MIGRAD    STATUS=INITIATE      115 CALLS         116 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  mean gaus    3.00000e+00   1.00000e-01   0.00000e+00          -nan
+   2  sigma gaus   1.00000e+00   1.00000e-01   0.00000e+00          -nan
+   3  const        1.00000e-01   1.00000e-02   0.00000e+00          -nan
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING -nan TO DIAGONAL.
+ FCN=inf FROM MIGRAD    STATUS=CONVERGED     172 CALLS         173 TOTAL
+                     EDM=-nan    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  mean gaus    3.00000e+00           nan   1.54843e+02          -nan
+   2  sigma gaus   1.00000e+00           nan   5.16144e+01          -nan
+   3  const        1.00000e-01           nan   5.16144e+00          -nan
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  3    ERR DEF=1
+        nan        nan        nan 
+        nan        nan        nan 
+        nan        nan       -nan 
+ERR MATRIX NOT POS-DEF
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2      3
+        1      nan     nan    nan    nan
+        2      nan     nan    nan    nan
+        3     -nan     nan    nan   -nan
+ ERR MATRIX NOT POS-DEF
+ FCN=inf FROM MIGRAD    STATUS=CONVERGED     172 CALLS         173 TOTAL
+                     EDM=-nan    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  mean gaus    3.00000e+00           nan   1.54843e+02          -nan
+   2  sigma gaus   1.00000e+00           nan   5.16144e+01          -nan
+   3  const        1.00000e-01           nan   5.16144e+00          -nan
+
