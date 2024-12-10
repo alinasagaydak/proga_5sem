@@ -3,10 +3,13 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <iostream>
 
 #include <TH1D.h>
 #include <TCanvas.h>
 #include <TMinuit.h>
+#include <TFitter.h>
+#include <TVirtualFitter.h>
 
 //Global variables
 double hist1[100];
@@ -79,8 +82,8 @@ void task10() {
 // Минимизация хи-квадрат
     // Init values
     for (int i = 0; i < 100; i++) {
-        hist1[i] = data1[i];
-        hist2[i] = data2[i];
+        hist1[i] = h1->GetBinContent(i);
+        hist2[i] = h2->GetBinContent(i);
     }
     
     ampl = 0.;
@@ -89,39 +92,48 @@ void task10() {
     for (int i = 0; i < 100; i++) x[i] = i + 500;
     
     //The errors values
+    //for (int i = 0; i < 100; i++) {
+    //    if (hist1[i] != 0) { error1[i] = sqrt(hist1[i]); continue; }
+    //    if (hist2[i] != 0) { error2[i] = sqrt(hist2[i]); continue; }
+    //    error1[i] = sqrt(3.09); // уровень достоверности 95%
+    //    error2[i] = sqrt(3.09); 
+   // }
     for (int i = 0; i < 100; i++) {
-        if (hist1[i] != 0) { error1[i] = sqrt(hist1[i]); continue; }
-        if (hist2[i] != 0) { error2[i] = sqrt(hist2[i]); continue; }
-        error1[i] = sqrt(3.09); // уровень достоверности 95%
-        error2[i] = sqrt(3.09); 
+        if (hist1[i] == 0) error1[i] = sqrt(3.09);
+        else error1[i] = sqrt(hist1[i]);
     }
 
-    TMinuit *gMinuit = new TMinuit(3);  //initialize TMinuit with a maximum of 5 params
+    for (int i = 0; i < 100; i++) {
+        if (hist2[i] == 0) error2[i] = sqrt(3.09);
+        else error2[i] = sqrt(hist2[i]);
+    }
+
+    TMinuit *gMinuit = new TMinuit(3);
     gMinuit->SetFCN(fcn);
 
     double arglist[10];
     int ierflg = 0;
 
     arglist[0] = 1;
-    gMinuit->mnexcm("SET ERR", arglist , 1, ierflg);
+    gMinuit->mnexcm("SET ERR", arglist, 1, ierflg);
 
     // Set starting values and step sizes for parameters
-    static double vstart[3] = {550, 30, 2};
-    static double step[3] = {1, 1, 0.5};
+    static double vstart[3] = {550., 20., 1.};
+    static double step[3] = {0.1 , 0.1 , 0.1};
     gMinuit->mnparm(0, "mean gaus", vstart[0], step[0], 0, 0, ierflg);
     gMinuit->mnparm(1, "sigma gaus", vstart[1], step[1], 0, 0, ierflg);
     gMinuit->mnparm(2, "const", vstart[2], step[2], 0, 0, ierflg);
 
     // Now ready for minimization step
     arglist[0] = 500;
-    arglist[1] = 1.;
-    gMinuit->mnexcm("MIGRAD", arglist , 2, ierflg);
+    arglist[1] = 0.1;
+    gMinuit->mnexcm("MIGRAD", arglist, 2, ierflg);
 
     // Print results
-    double amin, edm, errdef;
-    int nvpar, nparx, icstat;
-    gMinuit->mnstat(amin, edm, errdef, nvpar, nparx, icstat);
-    gMinuit->mnprin(3, amin);
+    //double amin, edm, errdef;
+    //int nvpar, nparx, icstat;
+    //gMinuit->mnstat(amin, edm, errdef, nvpar, nparx, icstat);
+    //gMinuit->mnprin(3, amin);
 
 
     TCanvas* c = new TCanvas();
