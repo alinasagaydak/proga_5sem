@@ -97,9 +97,7 @@ void task10() {
         if (hist2[i] == 0) error2[i] = sqrt(3.09);
         else error2[i] = sqrt(hist2[i]);
     }
-    for (int i = 0; i < 100; i++) {
-        std::cout << "error1 = \t" << error1[i] << "\terror2 = \t" << error2[i] << std::endl;
-    }
+    
     TMinuit *gMinuit = new TMinuit(4);
     gMinuit->SetFCN(fcn);
 
@@ -148,11 +146,11 @@ void task10() {
     TArrayD vals_to_file[3];
     vals_to_file[0] = 100 + 100 - 1 - 4; //ndf
     vals_to_file[1] = chi2;
-    vals_to_file[2] = (int)ampl;
+    vals_to_file[2] = (int)(ampl * (sqrt(2*TMath::Pi()) * sigma));
 
     std::cout << "ndf = \t" << 100 + 100 - 1 - 4 << std::endl;
     std::cout << "chi2 = \t" << chi2 << std::endl;
-    std::cout << "number of events under gaus = \t" << (int)ampl << std::endl;
+    std::cout << "number of events under gaus = \t" << (int)(ampl * (sqrt(2*TMath::Pi()) * sigma)) << std::endl;
 
     TCanvas* c = new TCanvas("c", " ", 800, 600);
     c->Divide(1, 2);
