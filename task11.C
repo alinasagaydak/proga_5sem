@@ -32,8 +32,9 @@ void fcn (int &npar, double *gin, double &f, double *par, int iflag){
     double chisq = 0;
     chi2 = 0;
     for (int i = 0; i < nbins; i++) {
-        double delta = TMath::Poisson(hist1[i], func(x[i], par) + par[3]);
-        chisq += -2. * log(delta);
+        double delta1 = TMath::Poisson(hist1[i], func(x[i], par) + par[3]);
+        double delta2 = TMath::Poisson(hist2[i], par[3]);
+        chisq += -2. * log(delta1) - 2. * log(delta2);
         chi2 += chisq;
     }
     chi2 /= 100.;
