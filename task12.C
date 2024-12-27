@@ -15,7 +15,10 @@ void FillDataFromFile (std::string name_file, std::vector<double>& data) {
 }
 
 double fitfunc(double* x, double* par) {
-    return par[0] * sin(x[0] + par[1]) + par[2] + par[3] * TMath::Gamma(0.5, x[0]);
+    //auto f1 = new TF1("f1", "TMath::Gamma(par[3], x[0])", 0., 10., 1);
+    //double C = 1000 + par[0] * (cos(10+par[1]) - cos(par[1])) - par[2] * f1->Integral(0., 10.);
+    //return par[0] * sin(x[0] + par[1]) + C + par[2] * TMath::Gamma(par[3], x[0]);
+    return par[0] + par[1] * sin(par[2] * (x[0] + par[3]));
 }
 
 void task12() {
@@ -28,11 +31,10 @@ void task12() {
     for (double val : data) h->Fill(val);
 
     auto fitf = new TF1("fitf", fitfunc, 0., 10., 4);
-    fitf->SetParameter(0, 5.);
-    fitf->SetParameter(1, TMath::Pi()); 
-    fitf->SetParameter(2, 10.);
-    fitf->SetParameter(3, 1.); 
-    fitf->SetParNames("Ampl sine", "sine phase", "const", "Ampl Gamma");
+    fitf->SetParameter(0, 10.);
+    fitf->SetParameter(1, 1.); 
+    fitf->SetParameter(2, 1.);
+    fitf->SetParameter(3, TMath::Pi()/2.); 
     h->Fit(fitf, "PS");
     h->Draw();
 }
